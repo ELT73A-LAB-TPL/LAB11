@@ -53,6 +53,7 @@ set(STM32_Drivers_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/ssd1306/ssd1306.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/ssd1306/ssd1306_fonts.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/ssd1306/ssd1306_tests.c
 )
 
 # Drivers Midllewares
