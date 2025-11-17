@@ -15,7 +15,7 @@ git config list --show-origin
 ```
 How to commit updates
 ```bash
-cd LAB08
+cd LAB11
 git status
 git add .
 git commit -m "My message for this commit!"
