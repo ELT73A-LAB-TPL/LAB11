@@ -76,7 +76,7 @@ static void MX_I2C1_Init(void);
 int main(void) {
 
   /* USER CODE BEGIN 1 */
-  // char myText[] = "Hello, CCD1306!";
+  // char myText[] = "Hello, SSD1306!";
   // char retVal;
 
   /* USER CODE END 1 */
@@ -114,7 +114,7 @@ int main(void) {
   //  ssd1306_UpdateScreen();
 
   // Run tests
-  ssd1306_TestAll();
+  // ssd1306_TestAll();
 
   // ssd1306_TestBorder();
   // ssd1306_TestFonts1();
@@ -134,7 +134,7 @@ int main(void) {
   /* USER CODE BEGIN WHILE */
   while (1) {
     /* USER CODE END WHILE */
-
+    ssd1306_TestDrawBitmap();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
