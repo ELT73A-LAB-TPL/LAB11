@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "ssd1306.h"
+#include "ssd1306_fonts.h" // Include the fonts header file located at
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -75,6 +76,8 @@ static void MX_I2C1_Init(void);
 int main(void) {
 
   /* USER CODE BEGIN 1 */
+  char myText[] = "Hello, CCD1306!";
+  char retVal;
 
   /* USER CODE END 1 */
 
@@ -103,7 +106,11 @@ int main(void) {
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   ssd1306_Init();
-  ssd1306_Fill(White);
+  // ssd1306_Fill(White);
+  // ssd1306_UpdateScreen();
+
+  ssd1306_SetCursor(5, 5);
+  retVal = ssd1306_WriteString(myText, Font_7x10, White);
   ssd1306_UpdateScreen();
   /* USER CODE END 2 */
 
