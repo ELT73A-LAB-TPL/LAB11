@@ -29,6 +29,11 @@ Generate code with EXTI0, ADC1, PWM and DMA
 ```bash
 LoadMX TIM2EXTI0ADC1PWMDMA TIM2EXTI0ADC1PWMDMA.txt Y
 ```
+
+```bash
+LoadMX TIM2EXTI0ADC1PWMDMAI2C TIM2EXTI0ADC1PWMDMAI2C.txt
+```
+
 ## Running STM32CubeMX in command-line mode
  - https://ruseleredu.github.io/stm32doc/docs/loadmx
 
