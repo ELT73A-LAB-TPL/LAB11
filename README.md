@@ -1,4 +1,4 @@
-# LAB08 template for ELT73A course 
+# LAB1 template for ELT73A course 
 ## Git commands
 How to config git
 ```bash
@@ -34,23 +34,37 @@ LoadMX TIM2EXTI0ADC1PWMDMA TIM2EXTI0ADC1PWMDMA.txt Y
 LoadMX TIM2EXTI0ADC1PWMDMAI2C TIM2EXTI0ADC1PWMDMAI2C.txt
 ```
 
-## Running STM32CubeMX in command-line mode
- - https://ruseleredu.github.io/stm32doc/docs/loadmx
+### Uso do display OLED SSD1306
 
-## References
-### STM32 Arm® Cortex® MCU wiki
-- https://wiki.st.com/stm32mcu/
-  
-### MiniF4-STM32F401CEU6
-- https://github.com/WeActStudio/WeActStudio.MiniSTM32F4x1
-  
-### STM32CubeF4 MCU Firmware Package
-- https://github.com/STMicroelectronics/STM32CubeF4
-- https://github.com/STMicroelectronics/STM32Cube_MCU_Overall_Offer
+Display OLED 0.96″ 128×64 I2C Azul
 
-### STM32 Development Tools
-- https://www.st.com/en/development-tools/stm32cubemx.html
-- https://www.st.com/en/development-tools/stm32cubeclt.html
-- https://www.st.com/en/development-tools/stm32cubeprog.html
+Recursos:
 
+- https://github.com/afiskon/stm32-ssd1306
+- https://www.youtube.com/watch?v=97_Vyph9EzM
+- https://lvgl.io/tools/imageconverter
+- https://github.com/sbrin/lopaka
+- https://github.com/olikraus/u8g2
+- https://www.youtube.com/watch?v=Eyvzw_ujcS0
+
+More:
+
+- https://www.youtube.com/watch?v=97_Vyph9EzM
+- https://github.com/lexus2k/ssd1306
+- https://www.makerhero.com/blog/controlando-um-display-oled-com-a-biblioteca-ssd1306/
+- https://www.makerhero.com/blog/display-oled-i2c-raspberry-pi-pico/
+- https://github.com/John-Hatton/BlackPill_I2C_Display
+- https://controllerstech.com/oled-display-using-i2c-stm32/
+- https://www.youtube.com/watch?v=HtyPPSO52GY
+- https://learn.adafruit.com/monochrome-oled-breakouts/downloads
+- https://wokwi.com/projects/309427357921313345
+
+### Uso do stm32-i2c-lcd-1602
+
+STM32: LCD 1602 w/ I2C adapter usage example
+
+- https://github.com/afiskon/stm32-i2c-lcd-1602
+- https://deepbluembedded.com/stm32-i2c-lcd-library-example-16x2-20x4-multiple-lcds/
+- https://github.com/light-tech/LearnSTM32
+- https://controllerstech.com/i2c-lcd-in-stm32/
 
