@@ -1,18 +1,6 @@
-# LAB1 template for ELT73A course 
+# LAB11 template for ELT73A course 
 ## Git commands
-How to config git
-```bash
-git config --global user.name "Your Name"
-git config --global user.email yourmail@domain.tld
-```
-It's recommended to verify that the your Git installation is not performing any transformation between LFs and CRLFs. 
 
-```bash
-git config --global core.autocrlf false
-```
-```bash
-git config list --show-origin
-```
 How to commit updates
 ```bash
 cd LAB11
@@ -27,11 +15,7 @@ git log
  
 Generate code with EXTI0, ADC1, PWM and DMA
 ```bash
-LoadMX TIM2EXTI0ADC1PWMDMA TIM2EXTI0ADC1PWMDMA.txt Y
-```
-
-```bash
-LoadMX TIM2EXTI0ADC1PWMDMAI2C TIM2EXTI0ADC1PWMDMAI2C.txt
+LoadMX TEMPSENSOR TEMPSENSOR.txt
 ```
 
 ### Uso do display OLED SSD1306
