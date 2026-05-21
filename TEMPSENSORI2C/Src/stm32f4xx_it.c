@@ -22,6 +22,7 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,7 +32,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define AVG_SLOPE   2.5f     // mV/°C
+#define V_AT_25C    0.76f    // Volts
+#define V_REF_INT   1.21f    // Internal reference voltage
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -41,7 +44,10 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+extern bool BLUELED;
+extern uint32_t AD_RES_BUFFER[3];
+extern uint16_t ADC1IN1,TEMPSENSOR,VREFINT;
+extern float voltage1,v_ref,v_sense,temp;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -206,7 +212,7 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
-
+  BLUELED = !BLUELED;
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(User_KEY_EXTI0_Pin);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
@@ -224,7 +230,7 @@ void ADC_IRQHandler(void)
   /* USER CODE END ADC_IRQn 0 */
   HAL_ADC_IRQHandler(&hadc1);
   /* USER CODE BEGIN ADC_IRQn 1 */
-
+  
   /* USER CODE END ADC_IRQn 1 */
 }
 
@@ -238,7 +244,7 @@ void TIM2_IRQHandler(void)
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
-
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)AD_RES_BUFFER, 3);
   /* USER CODE END TIM2_IRQn 1 */
 }
 
@@ -257,5 +263,24 @@ void DMA2_Stream0_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+  // Conversion Complete & DMA Transfer Complete As Well
+  ADC1IN1 = AD_RES_BUFFER[0];
+  TEMPSENSOR = AD_RES_BUFFER[1];
+  VREFINT = AD_RES_BUFFER[2];
+  voltage1 = (ADC1IN1 * 3.3) / 4095;
+  // 1. Calculate the actual VREF (VDDA)
+  // This compensates for power supply fluctuations
+  v_ref = (V_REF_INT * 4095.0f) / (float)VREFINT;
 
+  // 2. Convert raw temperature sensor value to voltage
+  v_sense = ((float)TEMPSENSOR * v_ref) / 4095.0f;
+
+  // 3. Final Temperature in Celsius
+  // Note: Some datasheets use (V_sense - V_25) / Slope + 25.
+  // Check your specific RM; usually, if Slope is positive, it's (V_sense - V_at_25).
+  temp = ((v_sense - V_AT_25C) * 1000.0f / AVG_SLOPE) + 25.0f;
+  TIM2->CCR1 = ADC1IN1;  // PWM CH1 duty cycle update based on ADC1IN1
+}
 /* USER CODE END 1 */
