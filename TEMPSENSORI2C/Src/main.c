@@ -22,6 +22,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
+#include "ssd1306.h"
+#include "ssd1306_fonts.h" // Include the fonts header file located at
+#include "ssd1306_tests.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -69,7 +72,8 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+char myText[] = "Hello, SSD1306!";
+char retVal;
 /* USER CODE END 0 */
 
 /**
@@ -106,7 +110,32 @@ int main(void)
   MX_TIM2_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
- HAL_TIM_PWM_Start_IT(&htim2,TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start_IT(&htim2,TIM_CHANNEL_1);
+
+   ssd1306_Init();
+  ssd1306_Fill(White);
+  ssd1306_UpdateScreen();
+
+  ssd1306_SetCursor(5, 5);
+  retVal = ssd1306_WriteString(myText, Font_7x10, White);
+  ssd1306_UpdateScreen();
+
+  // Run tests
+  ssd1306_TestAll();
+
+  // ssd1306_TestBorder();
+  // ssd1306_TestFonts1();
+  // ssd1306_TestFonts2();
+  // ssd1306_TestFPS();
+  // ssd1306_TestLine();
+  // ssd1306_TestRectangle();
+  // ssd1306_TestRectangleFill();
+  // ssd1306_TestRectangleInvert();
+  // ssd1306_TestCircle();
+  // ssd1306_TestArc();
+  // ssd1306_TestPolyline();
+  // ssd1306_TestDrawBitmap();
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
