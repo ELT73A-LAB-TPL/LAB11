@@ -112,7 +112,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start_IT(&htim2,TIM_CHANNEL_1);
 
-   ssd1306_Init();
+  ssd1306_Init();
   ssd1306_Fill(White);
   ssd1306_UpdateScreen();
 
