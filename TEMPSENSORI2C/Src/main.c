@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
+#include <stdio.h>
 #include "ssd1306.h"
 #include "ssd1306_fonts.h" // Include the fonts header file located at
 #include "ssd1306_tests.h"
@@ -72,8 +73,8 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-char myText[] = "Hello, SSD1306!";
-char retVal;
+// char myText[] = "Hello, SSD1306!";
+// char retVal;
 /* USER CODE END 0 */
 
 /**
@@ -94,7 +95,12 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
+//char buffer[30];
+//snprintf(buffer, sizeof(buffer), "Temp: %d.%02d", int_part, dec_part);
   /* USER CODE END Init */
+
+  // Format temperature string
+// snprintf(buffer, sizeof(buffer), "Temp: %.1f C", temperature);
 
   /* Configure the system clock */
   SystemClock_Config();
@@ -112,16 +118,12 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start_IT(&htim2,TIM_CHANNEL_1);
 
-  ssd1306_Init();
-  ssd1306_Fill(White);
-  ssd1306_UpdateScreen();
+// Initialize
+    ssd1306_Init();
 
-  ssd1306_SetCursor(5, 5);
-  retVal = ssd1306_WriteString(myText, Font_7x10, White);
-  ssd1306_UpdateScreen();
 
   // Run tests
-  ssd1306_TestAll();
+  // ssd1306_TestAll();
 
   // ssd1306_TestBorder();
   // ssd1306_TestFonts1();
@@ -136,6 +138,8 @@ int main(void)
   // ssd1306_TestPolyline();
   // ssd1306_TestDrawBitmap();
   
+  char line1[32];
+char line2[32];
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -150,6 +154,20 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    snprintf(line1, sizeof(line1), "Volt: %.2f V", voltage1);
+    snprintf(line2, sizeof(line2), "Temp: %.1f C", temp);
+
+    ssd1306_Fill(Black);
+
+    ssd1306_SetCursor(0, 0);
+    ssd1306_WriteString(line1, Font_7x10, White);
+
+    ssd1306_SetCursor(0, 16);
+    ssd1306_WriteString(line2, Font_7x10, White);
+
+    ssd1306_UpdateScreen();
+
+    HAL_Delay(200);
   }
   /* USER CODE END 3 */
 }
